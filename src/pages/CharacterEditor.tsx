@@ -341,7 +341,13 @@ const CharacterEditor: React.FC = () => {
 
       {/* 기본 정보 탭 */}
       <TabPanel value={tabValue} index={0}>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
+        <Box sx={{ 
+          py: 3,
+          minHeight: 'calc(100vh - 300px)',
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, 
+          gap: 3 
+        }}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 3 }}>
@@ -458,90 +464,104 @@ const CharacterEditor: React.FC = () => {
 
       {/* 시스템 프롬프트 탭 */}
       <TabPanel value={tabValue} index={1}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" sx={{ mb: 3 }}>
-              시스템 프롬프트
-            </Typography>
+        <Box sx={{ 
+          py: 3,
+          minHeight: 'calc(100vh - 300px)' 
+        }}>
+          <Card sx={{ height: '100%' }}>
+            <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="h6" sx={{ mb: 3 }}>
+                시스템 프롬프트
+              </Typography>
 
-            <TextField
-              label="시스템 프롬프트"
-              value={character.systemPrompt || ''}
-              onChange={(e) => handleInputChange('systemPrompt', e.target.value)}
-              fullWidth
-              multiline
-              rows={20}
-              helperText="AI가 이 캐릭터를 연기할 때 따를 상세한 지침서"
-            />
+              <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <TextField
+                  label="시스템 프롬프트"
+                  value={character.systemPrompt || ''}
+                  onChange={(e) => handleInputChange('systemPrompt', e.target.value)}
+                  fullWidth
+                  multiline
+                  rows={20}
+                  sx={{ flexGrow: 1 }}
+                  helperText="AI가 이 캐릭터를 연기할 때 따를 상세한 지침서"
+                />
 
-            <Box sx={{ mt: 2 }}>
-              <Alert severity="info">
-                <Typography variant="body2">
-                  <strong>시스템 프롬프트 작성 팁:</strong>
-                </Typography>
-                <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
-                  <li>캐릭터의 배경과 성격을 명확히 정의하세요</li>
-                  <li>대화 스타일과 어투를 구체적으로 설명하세요</li>
-                  <li>금지사항과 허용사항을 명시하세요</li>
-                  <li>예시 대화나 문장을 포함하면 더 효과적입니다</li>
-                </ul>
-              </Alert>
-            </Box>
-          </CardContent>
-        </Card>
+                <Box sx={{ mt: 2 }}>
+                  <Alert severity="info">
+                    <Typography variant="body2">
+                      <strong>시스템 프롬프트 작성 팁:</strong>
+                    </Typography>
+                    <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
+                      <li>캐릭터의 배경과 성격을 명확히 정의하세요</li>
+                      <li>대화 스타일과 어투를 구체적으로 설명하세요</li>
+                      <li>금지사항과 허용사항을 명시하세요</li>
+                      <li>예시 대화나 문장을 포함하면 더 효과적입니다</li>
+                    </ul>
+                  </Alert>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
       </TabPanel>
 
       {/* 버전 히스토리 탭 */}
       <TabPanel value={tabValue} index={2}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" sx={{ mb: 3 }}>
-              Git 스타일 버전 히스토리
-            </Typography>
-
-            <Box sx={{ mb: 3 }}>
-              <Alert severity="info">
-                이 캐릭터의 개발 과정을 Git 그래프로 시각화했습니다. 
-                각 커밋은 캐릭터의 새로운 버전을 나타냅니다.
-              </Alert>
-            </Box>
-
-            <Box 
-              ref={gitgraphRef}
-              sx={{ 
-                bgcolor: 'background.paper',
-                border: 1,
-                borderColor: 'divider',
-                borderRadius: 2,
-                p: 2,
-                overflow: 'auto',
-                minHeight: 400,
-              }}
-            >
-              {renderGitGraph()}
-            </Box>
-
-            <Box sx={{ mt: 3 }}>
-              <Typography variant="subtitle2" gutterBottom>
-                브랜치 설명:
+        <Box sx={{ 
+          py: 3,
+          minHeight: 'calc(100vh - 300px)' 
+        }}>
+          <Card sx={{ height: '100%' }}>
+            <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="h6" sx={{ mb: 3 }}>
+                Git 스타일 버전 히스토리
               </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#6366f1' }} />
-                  <Typography variant="body2">main - 안정적인 릴리즈 버전</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#ec4899' }} />
-                  <Typography variant="body2">feature/* - 새로운 기능 개발</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#10b981' }} />
-                  <Typography variant="body2">HEAD - 현재 작업 중인 버전</Typography>
+
+              <Box sx={{ mb: 3 }}>
+                <Alert severity="info">
+                  이 캐릭터의 개발 과정을 Git 그래프로 시각화했습니다. 
+                  각 커밋은 캐릭터의 새로운 버전을 나타냅니다.
+                </Alert>
+              </Box>
+
+              <Box 
+                ref={gitgraphRef}
+                sx={{ 
+                  bgcolor: 'background.paper',
+                  border: 1,
+                  borderColor: 'divider',
+                  borderRadius: 2,
+                  p: 2,
+                  overflow: 'auto',
+                  flexGrow: 1,
+                  minHeight: 400,
+                }}
+              >
+                {renderGitGraph()}
+              </Box>
+
+              <Box sx={{ mt: 3 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  브랜치 설명:
+                </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#6366f1' }} />
+                    <Typography variant="body2">main - 안정적인 릴리즈 버전</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#ec4899' }} />
+                    <Typography variant="body2">feature/* - 새로운 기능 개발</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#10b981' }} />
+                    <Typography variant="body2">HEAD - 현재 작업 중인 버전</Typography>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Box>
       </TabPanel>
 
       {/* 커밋 다이얼로그 */}
